@@ -1,0 +1,159 @@
+// Base styles
+:root {
+  --primary: #00f0ff;
+  --secondary: #ff00f0;
+  --dark: #0a0a20;
+  --light: #f0f0ff;
+  --mouse-x: 0.5;
+  --mouse-y: 0.5;
+}
+
+body {
+  background-color: var(--dark);
+  color: var(--light);
+  font-family: 'Courier New', monospace;
+  overflow-x: hidden;
+}
+
+.app {
+  transition: all 0.3s ease;
+  
+  &.easter-egg {
+    filter: hue-rotate(90deg);
+    
+    * {
+      animation: rainbow 2s infinite;
+    }
+  }
+}
+
+// Adventure Mode
+.adventure-mode {
+  background: radial-gradient(
+    circle at calc(var(--mouse-x) * 100%) calc(var(--mouse-y) * 100%),
+    rgba(0, 240, 255, 0.1) 0%,
+    transparent 50%
+  );
+  padding: 2rem;
+  border: 2px solid var(--primary);
+  border-radius: 1rem;
+  
+  .avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    
+    .avatar-card {
+      background: rgba(10, 10, 32, 0.8);
+      border: 1px solid var(--secondary);
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(255, 0, 240, 0.3);
+      }
+      
+      .avatar-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+// Skill Tree
+.skill-tree {
+  .skill-categories {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .skill {
+    background: rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    position: relative;
+    cursor: help;
+    
+    &.active {
+      background: rgba(0, 240, 255, 0.1);
+    }
+    
+    .skill-level-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      z-index: -1;
+      transition: width 1s ease;
+    }
+    
+    .skill-level {
+      float: right;
+      font-weight: bold;
+    }
+  }
+  
+  .skill-details {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-left: 3px solid var(--primary);
+  }
+}
+
+// Project Quests
+.project-quests {
+  .quests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .quest-card {
+    background: rgba(10, 10, 32, 0.8);
+    border: 1px solid var(--primary);
+    padding: 1rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: var(--secondary);
+    }
+    
+    &.expanded {
+      grid-column: span 2;
+    }
+    
+    .quest-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      
+      .quest-difficulty {
+        margin-left: auto;
+        background: var(--secondary);
+        padding: 0.2rem 0.5rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes rainbow {
+  0% { color: #ff0000; }
+  14% { color: #ff7f00; }
+  28% { color: #ffff00; }
+  42% { color: #00ff00; }
+  57% { color: #0000ff; }
+  71% { color: #4b0082; }
+  85% { color: #9400d3; }
+  100% { color: #ff0000; }
+}
